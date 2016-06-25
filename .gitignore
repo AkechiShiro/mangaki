@@ -15,3 +15,5 @@ node_modules
 fixtures/*.json
 restore.sh
 *.coverage
+/provisioning/inventory
+/provisioning/env_vars/
