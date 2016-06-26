@@ -10,11 +10,15 @@ Vagrant.configure(2) do |config|
     # For a complete reference, please see the online documentation at
     # https://docs.vagrantup.com.
 
-    config.vm.box = "ubuntu/trusty64"
+    config.vm.box = "debian/jessie64"
 
     config.vm.network "private_network", ip: "10.99.42.10"
 
-    config.vm.provision :shell, path: "provisioning/bootstrap.sh"
+    config.vm.provision "ansible" do |ansible|
+	ansible.playbook = "provisioning/site.yml"
+	ansible.verbose = "v"
+	ansible.ask_vault_pass = true
+    end
 
     config.vm.provider "virtualbox" do |vb|
         vb.name = "Mangaki"
